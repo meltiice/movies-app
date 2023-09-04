@@ -1,0 +1,7 @@
+.film-card {
+   Width: 454px;
+   height: 281px;
+   background-color: #ffffff;
+   box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+   overflow: hidden;
+}

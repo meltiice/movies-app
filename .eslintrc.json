@@ -17,8 +17,13 @@
       "indent": "off",
       "semi": "off",
       "object-curly-newline": "off",
-      "max-len": ["error", { "code": 150 }],
-      "class-methods-use-this": "off"
+      "max-len": ["error", { "code": 500 }],
+      "class-methods-use-this": "off",
+      "quotes": "off",
+      "no-underscore-dangle": "off",
+      "no-return-await": "off",
+      "react/prop-types": "off",
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}]
    },
    "parser": "@babel/eslint-parser",
    "parserOptions": {

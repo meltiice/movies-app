@@ -1,8 +1,33 @@
 .movie-app {
+  background-color: white;
+}
+.main {
   background-color: #f7f7f7;
+  width: 70%;
+  margin: auto;
+  padding: 20px;
+  height: auto;
+  min-height: 100vh;
+}
+.pagination {
+  width: 280px;
+  margin: 20px auto;
+}
+.search-input {
+  width: calc(100% - 72px - 70px);
+  padding: 5px;
+  display: block;
+  margin: 0 auto;
+}
+.films-list{
+  padding-top: 20px;
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 20px;
-  padding: 30px;
+}
+.spinner {
+  display: block;
 }

@@ -7,7 +7,8 @@ export default class MovieService {
    method: "GET",
    headers: {
      accept: "application/json",
-     Authorization: `Bearer ${this.AccessToken}`
+     Authorization: `Bearer ${this.AccessToken}`,
+     'Cache-Control': 'no-cache'
    }
  };
 
@@ -21,12 +22,8 @@ export default class MovieService {
     return await result.json();
   }
 
-  async getAllMovies() {
-    const result = await this.getResource('search/movie?query=return&include_adult=false&language=en-US&page=1');
+  async searchMovies(text, page) {
+    const result = await this.getResource(`search/movie?query=${text}&include_adult=false&language=en-US&page=${page}`);
     return result;
-  }
-
-  getPerson(id) {
-    return this.getResource(`/people/${id}`);
   }
 }

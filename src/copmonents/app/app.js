@@ -1,89 +1,83 @@
 import { Component } from "react";
-import { Spin, Input, Pagination } from "antd";
-import { debounce } from 'lodash';
-
-import FilmCard from "../filmCard";
-import MovieService from "../movieService";
 import "./app.css";
-import ErrorIndicator from "../errorIndicator";
+import Search from "../search";
+import Rated from "../rated";
+import MovieService from "../movieService";
+import { MovieServiceProvider } from "../movieServiceContext";
 
 export default class App extends Component {
   movieService = new MovieService();
 
   state = {
-    movies: [],
-    loading: true,
-    error: false,
-    page: 1,
-    searchText: ''
-  }
+    guestSession: localStorage.getItem("guestSession"),
+    tab: "Search",
+    generes: [],
+  };
 
   componentDidMount = () => {
-    this.updateMovies()
-  }
+    this.getGuestSession();
+    this.getGeneres();
+  };
 
-  componentDidUpdate = (prevProps, prevState) => {
-    if (this.state.page !== prevState.page) {
-      this.updateMovies()
+  getGuestSession = () => {
+    if (!this.state.guestSession) {
+      this.movieService
+        .getGuestSession()
+        .then((res) => {
+          this.setState({ guestSession: res });
+          localStorage.setItem("guestSession", res);
+        })
+        .catch(this.onError);
     }
-    if (this.state.searchText !== prevState.searchText) {
-      this.setState({ page: 1 })
-      this.updateMovies()
+  };
+
+  getGeneres = () => {
+    this.movieService.getGenres().then((res) => {
+      this.setState({ generes: res });
+    });
+  };
+
+  toggleTab = (element, tab) => {
+    const elementActive = document.querySelector(".tab-active");
+    if (element !== elementActive) {
+      element.classList.toggle("tab-active");
+      elementActive.classList.toggle("tab-active");
+      this.setState({ tab });
     }
-  }
-
-  onError = () => {
-    this.setState({ error: true, loading: false });
-  }
-
-  updateMovies() {
-    this.setState({ movies: [], loading: true })
-    this.movieService.searchMovies(this.state.searchText, this.state.page)
-      .then((res) => {
-        this.setState({ movies: res.results, loading: false });
-      })
-      .catch(this.onError);
-  }
-
-  inputSearch = (e) => {
-    if (e.target.value !== '') {
-      this.setState({ searchText: e.target.value })
-    }
-  }
-
-  onChange = (page) => {
-    this.setState({ page });
   };
 
   render() {
-    const { movies, loading, error, searchText, page } = this.state;
-    const errorMessage = error ? <ErrorIndicator /> : null;
-    const spinner = loading ? <Spin className="spinner"/> : null;
-    const noResults = movies.length > 0 || loading || searchText === '' ? null : <div>I didn`t find anything :c </div>;
-    const elements = movies.map((item) => (
-      <FilmCard
-      key = {item.id}
-      film = {item}
-      />
-    ));
-    const startText = movies.length === 0 && !errorMessage && !loading && !noResults ? <div>Search to find some movies</div> : null;
-    const pagination = searchText && !loading && !(noResults && page === 1) ? <Pagination className='pagination' current={this.state.page} onChange={this.onChange} total={50}/> : null;
-
+    const { tab, guestSession, generes } = this.state;
+    const tabComponent =
+      tab === "Search" ? (
+        <Search session={guestSession} />
+      ) : (
+        <Rated session={guestSession} />
+      );
     return (
       <div className="movie-app">
-        <div className="main">
-          <Input className="search-input" placeholder="Search for a movie..."
-                onChange={ debounce(this.inputSearch, 500) }
-          />
-          <div className="films-list">
-            {startText}
-            {errorMessage}
-            {spinner}
-            {noResults}
-            {elements}
+        <MovieServiceProvider value={generes}>
+          <div className="main">
+            <ul className="tab">
+              <li
+                className="tab-active"
+                onClick={(e) => {
+                  this.toggleTab(e.target, "Search");
+                }}
+              >
+                Search
+              </li>
+              <li
+                onClick={(e) => {
+                  this.toggleTab(e.target, "Rated");
+                }}
+              >
+                Rated
+              </li>
+            </ul>
+            {tabComponent}
           </div>
-          {pagination}
-        </div>
+        </MovieServiceProvider>
       </div>
     );
   }

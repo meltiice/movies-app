@@ -1,0 +1,12 @@
+.rate {
+  display: flex;
+  width: 100%;
+  height: auto;
+  padding: 10px 0;
+  gap: 5px;
+  margin-top: auto;
+}
+.star {
+  width: 10%;
+  height: auto;
+}

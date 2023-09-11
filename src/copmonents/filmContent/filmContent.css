@@ -1,8 +1,71 @@
 .film-content {
-  padding: 10px 20px 50px;
+  padding: 0 20px;
   width: 100%;
-  height: 100%;
+  height: 268px;
+  min-height: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.genere-container {
+  padding-top: 5px;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.genere {
+  list-style: none;
+  background-color: rgb(227, 227, 227);
+  border-radius: 3px;
+  padding: 2px 6px;
+}
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  padding: 10px 0 0 0;
+  box-sizing: border-box;
+}
+.title {
+  display: inline-block;
+  width: 80%;
+  font-size: 18px !important;
+  margin: 0 !important;
+}
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2.1px rgba(15, 28, 63);
+}
+.color-low {
+  box-shadow: inset 0 0 0 2.1px #e90000;
+}
+.color-middle {
+  box-shadow: inset 0 0 0 2.1px #e97e00;
+}
+.color-high {
+  box-shadow: inset 0 0 0 2.1px #e9d100;
+}
+.color-amazing {
+  box-shadow: inset 0 0 0 2.1px #66e900;
+}
+.rating-number {
+  display: block;
+  padding-bottom: 2px;
 }
 .film-date {
   color: grey;
+  width: 100%;
+}
+.paragraph {
+  overflow: hidden;
+  font-size: 12px;
+  height: auto;
 }

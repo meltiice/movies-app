@@ -23,6 +23,7 @@
       "no-underscore-dangle": "off",
       "no-return-await": "off",
       "react/prop-types": "off",
+      "no-extraneous-dependencies": "off",
       "import/no-extraneous-dependencies": ["error", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}]
    },
    "parser": "@babel/eslint-parser",

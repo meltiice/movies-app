@@ -1,12 +1,13 @@
 import { Component } from "react";
 import { Spin, Pagination } from "antd";
+import PropTypes from 'prop-types';
 
 import FilmCard from "../filmCard";
 import MovieService from "../movieService";
 import "../app/app.css";
 import ErrorIndicator from "../errorIndicator";
 
-export default class Rated extends Component {
+class Rated extends Component {
   movieService = new MovieService();
 
   state = {
@@ -52,24 +53,19 @@ export default class Rated extends Component {
   };
 
   render() {
-    const { movies, loading, error, searchText, page, guestSession } =
-      this.state;
+    const { movies, loading, error, searchText, page, guestSession } = this.state;
     const errorMessage = error ? <ErrorIndicator /> : null;
-    const spinner =
-      loading && !errorMessage ? <Spin className="spinner" /> : null;
-    const noResults =
-      movies.length > 0 ||
-      loading ||
-      searchText === "" ||
-      errorMessage ? null : (
+    const spinner = loading && !errorMessage ? <Spin className="spinner" /> : null;
+    const noResults = movies.length > 0
+      || loading
+      || searchText === ""
+      || errorMessage ? null : (
         <div>I didn`t find anything :c </div>
       );
-    const startText =
-      movies.length === 0 && !errorMessage && !loading && !noResults ? (
+    const startText = movies.length === 0 && !errorMessage && !loading && !noResults ? (
         <div>No movies</div>
       ) : null;
-    const pagination =
-      searchText && !loading && !(noResults && page === 1) && !errorMessage ? (
+    const pagination = searchText && !loading && !(noResults && page === 1) && !errorMessage ? (
         <Pagination
           className="pagination"
           current={this.state.page}
@@ -99,3 +95,12 @@ export default class Rated extends Component {
     );
   }
 }
+
+Rated.defaultProps = {
+  session: ''
+};
+Rated.propTypes = {
+  session: PropTypes.string
+};
+
+export default Rated

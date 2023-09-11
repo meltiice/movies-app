@@ -48,8 +48,7 @@ export default class App extends Component {
 
   render() {
     const { tab, guestSession, generes } = this.state;
-    const tabComponent =
-      tab === "Search" ? (
+    const tabComponent = tab === "Search" ? (
         <Search session={guestSession} />
       ) : (
         <Rated session={guestSession} />

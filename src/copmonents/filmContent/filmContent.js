@@ -1,12 +1,13 @@
 import { Component } from "react";
 import { Typography } from "antd";
+import PropTypes from 'prop-types';
 import Rate from "../rate";
 import "./filmContent.css";
 import { MovieServiceConsumer } from "../movieServiceContext";
 
 const { Title, Paragraph, Text } = Typography;
 
-export default class FilmContent extends Component {
+class FilmContent extends Component {
   colorRate = (averageRate) => {
     let className = "";
     if (averageRate < 3) {
@@ -71,3 +72,25 @@ export default class FilmContent extends Component {
     );
   }
 }
+FilmContent.defaultProps = {
+  id: 0,
+  title: '',
+  overview: '',
+  releaseDate: '',
+  session: '',
+  rating: 0,
+  averageRate: 0,
+  genresIds: [],
+}
+FilmContent.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string,
+  overview: PropTypes.string,
+  releaseDate: PropTypes.string,
+  session: PropTypes.string,
+  rating: PropTypes.number,
+  averageRate: PropTypes.number,
+  genresIds: PropTypes.arrayOf(PropTypes.number),
+};
+
+export default FilmContent

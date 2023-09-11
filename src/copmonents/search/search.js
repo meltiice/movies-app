@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Spin, Input, Pagination } from "antd";
+import PropTypes from 'prop-types';
 import { debounce } from "lodash";
 
 import FilmCard from "../filmCard";
@@ -7,7 +8,7 @@ import MovieService from "../movieService";
 import "../app/app.css";
 import ErrorIndicator from "../errorIndicator";
 
-export default class Search extends Component {
+class Search extends Component {
   movieService = new MovieService();
 
   state = {
@@ -60,21 +61,12 @@ export default class Search extends Component {
     const { movies, loading, error, searchText, page } = this.state;
     const { session } = this.props;
     const errorMessage = error ? <ErrorIndicator /> : null;
-    const spinner =
-      loading && !errorMessage ? <Spin className="spinner" /> : null;
-    const noResults =
-      movies.length > 0 ||
-      loading ||
-      searchText === "" ||
-      errorMessage ? null : (
-        <div>I didn`t find anything :c </div>
-      );
-    const startText =
-      movies.length === 0 && !errorMessage && !loading && !noResults ? (
-        <div>Search to find some movies</div>
-      ) : null;
-    const pagination =
-      searchText && !loading && !(noResults && page === 1) && !errorMessage ? (
+    const spinner = loading && !errorMessage ? <Spin className="spinner" /> : null;
+    const noResults = movies.length > 0 || loading || searchText === "" || errorMessage ? null
+                      : (<div>I didn`t find anything :c </div>);
+    const startText = movies.length === 0 && !errorMessage && !loading && !noResults
+                      ? (<div>Search to find some movies</div>) : null;
+    const pagination = searchText && !loading && !(noResults && page === 1) && !errorMessage ? (
         <Pagination
           className="pagination"
           current={this.state.page}
@@ -109,3 +101,12 @@ export default class Search extends Component {
     );
   }
 }
+
+Search.defaultProps = {
+  session: ''
+};
+Search.propTypes = {
+  session: PropTypes.string
+};
+
+export default Search

@@ -1,10 +1,10 @@
 import { Component } from "react";
+import PropTypes from 'prop-types';
 
-// import MovieService from "../movieService";
 import "./filmPicture.css";
 import icon from "./nopicture.png";
 
-export default class FilmPicture extends Component {
+class FilmPicture extends Component {
   render() {
     const { picture } = this.props;
     const link = picture
@@ -13,3 +13,11 @@ export default class FilmPicture extends Component {
     return <img className="film-picture" src={link} />;
   }
 }
+FilmPicture.defaultProps = {
+  picture: ''
+}
+FilmPicture.propTypes = {
+  picture: PropTypes.string
+};
+
+export default FilmPicture

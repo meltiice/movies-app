@@ -1,12 +1,13 @@
 import { Component } from "react";
 import { Col, Row } from "antd";
 import { format } from "date-fns";
+import PropTypes from 'prop-types';
 
 import FilmContent from "../filmContent";
 import FilmPicture from "../filmPicture";
 import "./filmcard.css";
 
-export default class FilmCard extends Component {
+class FilmCard extends Component {
   state = {
     id: this.props.film.id,
     title: this.props.film.original_title,
@@ -77,3 +78,31 @@ export default class FilmCard extends Component {
     );
   }
 }
+FilmCard.defaultProps = {
+  session: '',
+  film: {
+    id: 0,
+    title: '',
+    overview: '',
+    releaseDate: '',
+    picture: '',
+    rating: 0,
+    averageRate: 0,
+    genresIds: []
+  }
+}
+FilmCard.propTypes = {
+  session: PropTypes.string,
+  film: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    overview: PropTypes.string,
+    releaseDate: PropTypes.string,
+    picture: PropTypes.string,
+    rating: PropTypes.number,
+    averageRate: PropTypes.number,
+    genresIds: PropTypes.arrayOf(PropTypes.number),
+  })
+};
+
+export default FilmCard

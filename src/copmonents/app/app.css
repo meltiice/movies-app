@@ -66,3 +66,13 @@
   height: 1.5px;
   background-color: blueviolet;
 }
+@media (max-width: 1400px) {
+  .main {
+    width: 60%;
+  }
+}
+@media (max-width: 1030px) {
+  .main {
+    width: 100%;
+  }
+}

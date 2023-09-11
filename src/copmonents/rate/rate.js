@@ -1,10 +1,11 @@
 import { Component } from "react";
+import PropTypes from 'prop-types';
 import MovieService from "../movieService";
 import "./rate.css";
 import icon from "./star.png";
 import iconActive from "./star-active.png";
 
-export default class Rate extends Component {
+class Rate extends Component {
   movieService = new MovieService();
 
   state = {
@@ -53,3 +54,16 @@ export default class Rate extends Component {
     return <div className="rate">{elements}</div>;
   }
 }
+
+Rate.defaultProps = {
+  id: 0,
+  session: '',
+  rating: 0
+};
+Rate.propTypes = {
+  id: PropTypes.number,
+  session: PropTypes.string,
+  rating: PropTypes.number
+};
+
+export default Rate

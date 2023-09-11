@@ -1,8 +1,7 @@
 export default class MovieService {
   _apiBase = "https://api.themoviedb.org/3/";
 
-  AccessToken =
-    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYmQyOGY5MGQ5ODdhMGZjOTAyYzVkZThiOTllNDY4OCIsInN1YiI6IjY0ZTYxZWNjMWZlYWMxMDBlMTY4Y2NhOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3bV51BqTrNDF898J5uH-yAm1GcTaN3oj_bKdVnzqMIU";
+  AccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYmQyOGY5MGQ5ODdhMGZjOTAyYzVkZThiOTllNDY4OCIsInN1YiI6IjY0ZTYxZWNjMWZlYWMxMDBlMTY4Y2NhOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3bV51BqTrNDF898J5uH-yAm1GcTaN3oj_bKdVnzqMIU";
 
   options = {
     method: "GET",
